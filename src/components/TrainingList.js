@@ -12,9 +12,9 @@ function TrainingList() {
   }, []);
 
   const fetchTrainings = () => {
-    fetch("https://customerrest.herokuapp.com/api/trainings")
+    fetch("https://customerrest.herokuapp.com/gettrainings")
       .then((response) => response.json())
-      .then((data) => setTrainings(data.content))
+      .then((data) => setTrainings(data))
       .catch((err) => console.error(err));
   };
 
@@ -23,8 +23,9 @@ function TrainingList() {
     { field: 'duration', sortable: true, filter: true, floatingFilter: true },
     { field: 'activity', sortable: true, filter: true, floatingFilter: true },
     {
+      //FIX CUSTOMER NAME. ADD LAST NAME!
       headerName: 'Customer',
-      field: 'links.2.href',
+      field: 'customer.firstname',
       sortable: true,
       filter: true,
       floatingFilter: true,

@@ -9,28 +9,29 @@ import DialogTitle from '@mui/material/DialogTitle';
 function AddTraining(props) {
   const [open, setOpen] = useState(false);
   const [training, setTraining] = useState({
+    date: '',
     activity: '',
     duration: '',
-    date: '',
+    customer: props.customer,
   });
 
   const handleClickOpen = () => {
     setOpen(true);
-  }
+  };
 
   const handleClose = () => {
     setOpen(false);
-  }
+  };
 
   const handleSave = () => {
     props.addTraining(training);
     handleClose();
-  }
+  };
 
   const inputChanged = (event) => {
     event.preventDefault();
-    setTraining({ ...training, [event.target.name]: event.target.value })
-  }
+    setTraining({ ...training, [event.target.name]: event.target.value });
+  };
 
   return (
     <React.Fragment>
@@ -40,6 +41,15 @@ function AddTraining(props) {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>New Training</DialogTitle>
         <DialogContent>
+          <TextField 
+            name="date"
+            value={training.date}
+            onChange={inputChanged}
+            margin="dense"
+            label="Date"
+            fullWidth
+            variant='standard'
+          />
           <TextField 
             name="activity"
             value={training.activity}
@@ -55,15 +65,6 @@ function AddTraining(props) {
             onChange={inputChanged}
             margin="dense"
             label="Duration"
-            fullWidth
-            variant='standard'
-          />
-          <TextField 
-            name="date"
-            value={training.date}
-            onChange={inputChanged}
-            margin="dense"
-            label="Date"
             fullWidth
             variant='standard'
           />

@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 
 import AddCustomer from "./AddCustomer";
+import UpdateCustomer from './UpdateCustomer'
 import AddTraining from "./AddTraining";
 
 import "ag-grid-community/dist/styles/ag-grid.css";
@@ -58,20 +59,39 @@ function CustomerList() {
   }
 
   const addTraining = (training) => {
-    fetch('https://customerrest.herokuapp.com/api//trainings', {
-      method: 'POST',
-      headers: { 'Content-type': 'aplication/json' },
-      body: JSON.stringify(training),
+    fetch("https://customerrest.herokuapp.com/api/trainings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(training)
     })
       .then(response => {
         if (response.ok) {
           fetchCustomers();
           setMsg('Training added succesfully')
+          setOpen(true);
         } else {
           alert('Something went wrong')
         }
       })
       .catch(err => console.error(err))
+  }
+
+  const updateCustomer = (url, editedCustomer) => {
+    fetch(url, {
+      method: 'PUT',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify(editedCustomer),
+    })
+      .then(response => {
+        if (response.ok) {
+          fetchCustomers();
+          setMsg('Customer updated succesfully');
+          setOpen(true);
+        } else {
+          alert('Something went wrong');
+        }
+      })
+      .catch(err => console.error(err));
   }
 
   const columns = [
@@ -84,10 +104,18 @@ function CustomerList() {
     { field: 'phone', sortable: true, filter: true, floatingFilter: true },
     {
       headerName: '',
-      field: 'links.3.href',
+      field: 'links.0.href',
       width: 120,
       cellRendererFramework: params => (
-        <AddTraining addTraining={addTraining} params={params} />
+        <AddTraining addTraining={addTraining} customer={params.data.links[0].href} />
+      )
+    },
+    {
+      headerName: '',
+      field: 'links.0.href',
+      width: 120,
+      cellRendererFramework: params => (
+        <UpdateCustomer updateCustomer={updateCustomer} params={params} />
       ),
     },
     {
