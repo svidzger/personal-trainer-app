@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
-import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import UpdateIcon from '@mui/icons-material/Update';
+import SaveIcon from '@mui/icons-material/Save';
+import CancelIcon from '@mui/icons-material/Cancel';
+import Tooltip from '@mui/material/Tooltip';
 
 
 function UpdateCustomer(props) {
@@ -48,11 +53,16 @@ function UpdateCustomer(props) {
 
   return (
     <React.Fragment>
-      <Button size='small' onClick={handleClickOpen}>
-        Update
-      </Button>
+      <Tooltip title="Update customer">
+      <IconButton color="primary" size='small' onClick={handleClickOpen}>
+        <UpdateIcon />
+      </IconButton>
+      </Tooltip>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Update customer</DialogTitle>
+      <DialogActions>
+          <IconButton color="error" onClick={handleClose}><CancelIcon /></IconButton>
+        </DialogActions>
+        <DialogTitle textAlign="center">Update customer</DialogTitle>
         <DialogContent>
           <TextField
             name="firstname"
@@ -119,8 +129,7 @@ function UpdateCustomer(props) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSave}>Save</Button>
+          <Button variant="contained" startIcon={<SaveIcon />} onClick={handleSave}>Save</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

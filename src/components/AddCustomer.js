@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import SaveIcon from '@mui/icons-material/Save';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 function AddCustomer(props) {
   const [open, setOpen] = useState(false);
@@ -38,13 +42,16 @@ function AddCustomer(props) {
 
   return (
     <React.Fragment>
-      <Button variant="otlined" onClick={handleClickOpen}>
-        Add Customer
+      <Button style={{ marginTop: 4, marginRight: 1 }} color="success" variant="contained" startIcon={<AddCircleIcon />} onClick={handleClickOpen}>
+        New Customer
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>New customer</DialogTitle>
+        <DialogActions>
+          <IconButton color="error" onClick={handleClose}><CancelIcon /></IconButton>
+        </DialogActions>
+        <DialogTitle textAlign="center">New customer</DialogTitle>
         <DialogContent>
-          <TextField 
+          <TextField
             name="firstname"
             value={customer.firstname}
             onChange={inputChanged}
@@ -53,7 +60,7 @@ function AddCustomer(props) {
             fullWidth
             variant='standard'
           />
-          <TextField 
+          <TextField
             name="lastname"
             value={customer.lastname}
             onChange={inputChanged}
@@ -62,7 +69,7 @@ function AddCustomer(props) {
             fullWidth
             variant='standard'
           />
-          <TextField 
+          <TextField
             name="streetaddress"
             value={customer.streetaddress}
             onChange={inputChanged}
@@ -71,7 +78,7 @@ function AddCustomer(props) {
             fullWidth
             variant='standard'
           />
-          <TextField 
+          <TextField
             name="postcode"
             value={customer.postcode}
             onChange={inputChanged}
@@ -80,7 +87,7 @@ function AddCustomer(props) {
             fullWidth
             variant='standard'
           />
-          <TextField 
+          <TextField
             name="city"
             value={customer.city}
             onChange={inputChanged}
@@ -89,7 +96,7 @@ function AddCustomer(props) {
             fullWidth
             variant='standard'
           />
-          <TextField 
+          <TextField
             name="email"
             value={customer.email}
             onChange={inputChanged}
@@ -98,7 +105,7 @@ function AddCustomer(props) {
             fullWidth
             variant='standard'
           />
-          <TextField 
+          <TextField
             name="phone"
             value={customer.phone}
             onChange={inputChanged}
@@ -109,8 +116,7 @@ function AddCustomer(props) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleSave}>Save</Button>
-          <Button onClick={handleClose}>Close</Button>
+          <Button variant="contained" startIcon={<SaveIcon />} onClick={handleSave}>Save</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>
