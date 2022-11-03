@@ -8,7 +8,6 @@ import {
   Tooltip,
   Legend,
   Label,
-  ResponsiveContainer,
 } from 'recharts';
 
 function Statistics() {
