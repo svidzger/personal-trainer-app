@@ -172,7 +172,7 @@ function CustomerList() {
       </Box>
       <div
         className="ag-theme-material"
-        style={{ height: 650, width: "60%", margin: "auto" }}
+        style={{ height: 660, width: "60%", margin: "auto" }}
       >
         <AgGridReact
           rowData={customers}

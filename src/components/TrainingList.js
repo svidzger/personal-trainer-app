@@ -88,7 +88,7 @@ function TrainingList() {
     <React.Fragment>
       <div
         className="ag-theme-material"
-        style={{ height: 650, width: "35%", margin: "auto", marginTop: "60px" }}
+        style={{ height: 650, width: "60%", margin: "auto", marginTop: "60px" }}
       >
         <AgGridReact
           defaultColDef={{
